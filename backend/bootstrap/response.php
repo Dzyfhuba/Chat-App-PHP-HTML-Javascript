@@ -3,14 +3,14 @@
 namespace Lib;
 
 function responseJson(
-    array $data = [], 
-    int $status = 200, 
-    string $message = ''): void
-{
+    array $data = [],
+    int $statusCode = 200,
+    string $message = ''
+): void {
     header('Content-Type: application/json');
-    http_response_code($status);
+    http_response_code($statusCode);
     echo json_encode([
-        'status' => $status,
+        'status' => $statusCode,
         'message' => $message,
         'data' => $data
     ]);
