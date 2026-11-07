@@ -69,10 +69,10 @@ class Router
         if ($allowedMethods !== []) {
             $allowedMethods = array_values(array_unique($allowedMethods));
             header('Allow: ' . implode(', ', $allowedMethods));
-            responseJson(status: 405, message: 'Method not allowed');
+            responseJson(statusCode: 405, message: 'Method not allowed');
         }
 
-        responseJson(status: 404, message: 'Route not found');
+        responseJson(statusCode: 404, message: 'Route not found');
     }
 
     private function normalizePath(string $path): string

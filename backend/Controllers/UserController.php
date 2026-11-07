@@ -13,24 +13,26 @@ class UserController
     {
         $input = file_get_contents('php://input');
         if ($input === false) {
-            responseJson(status: 500, message: 'Unable to read request body');
+            responseJson(statusCode: 500, message: 'Unable to read request body');
         }
 
         $data = json_decode($input, true);
 
         if (json_last_error() !== JSON_ERROR_NONE || !is_array($data)) {
-            responseJson(status: 400, message: 'Request body must be a valid JSON object');
+            responseJson(statusCode: 400, message: 'Request body must be a valid JSON object');
         }
 
         $name = $data['name'] ?? null;
         $phone = $data['phone'] ?? null;
         $profilePicture = $data['profile_picture'] ?? null;
 
-        if (!is_string($name) || trim($name) === ''
+        if (
+            !is_string($name) || trim($name) === ''
             || !is_string($phone) || trim($phone) === ''
-            || !is_string($profilePicture)) {
+            || !is_string($profilePicture)
+        ) {
             responseJson(
-                status: 422,
+                statusCode: 422,
                 message: 'name, phone, and profile_picture are required strings'
             );
         }
@@ -43,7 +45,7 @@ class UserController
 
         responseJson(
             data: ['id' => $id],
-            status: 201,
+            statusCode: 201,
             message: 'User registered successfully'
         );
     }
