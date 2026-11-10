@@ -14,7 +14,7 @@ if (is_file($envPath)) {
 
 spl_autoload_register(static function (string $class): void {
     $prefixes = [
-        'Controllers\\' => dirname(__DIR__) . '/Controllers/',
+        'Controllers\\' => dirname(__DIR__) . '/controllers/',
         'Lib\\' => dirname(__DIR__) . '/lib/',
         'Models\\' => dirname(__DIR__) . '/models/',
     ];
