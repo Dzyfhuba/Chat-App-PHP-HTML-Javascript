@@ -6,6 +6,7 @@ use Controllers\UserController;
 use Lib\Router;
 use function Lib\responseJson;
 use Lib\DB;
+use Controllers\ChatController;
 
 return static function (Router $router): void {
     $router->get('/api/health', static function (): void {
@@ -21,4 +22,8 @@ return static function (Router $router): void {
     });
 
     $router->post('/api/users', [UserController::class, 'register']);
+
+    $router->post('/api/chat/image', [ChatController::class, 'uploadImage']);
+
+
 };

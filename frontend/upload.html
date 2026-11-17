@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileInput = document.getElementById('fileInput');
+        const uploadButton = document.getElementById('uploadButton');
+
+        uploadButton.addEventListener('click', function() {
+            const file = fileInput.files[0];
+            if (file) {
+                const formData = new FormData();
+                formData.append('image', file);
+
+                fetch('http://localhost:8000/api/chat/image', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            } else {
+                alert('Please select a file to upload.');
+            }
+        });
+    });
+</script>
+<body>
+    <input type="file" id="fileInput" accept=".jpg, .jpeg, .png, .gif">
+    <button id="uploadButton">Upload</button>
+</body>
+</html>
